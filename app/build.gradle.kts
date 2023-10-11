@@ -1,16 +1,19 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
     namespace = "com.example.creditcardexpenses"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.creditcardexpenses"
-        minSdk = 33
-        targetSdk = 33
+        minSdk = 26
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -30,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -51,14 +54,50 @@ android {
 
 dependencies {
 
+    val version = "1.5.2"
+
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-android:1.5.2")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
+    
+    //Para crear el gràfico de navegaciòn
+    implementation("androidx.navigation:navigation-compose:2.7.3")
+
+    //Hilt Dagger
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    implementation("com.google.dagger:hilt-android:2.44.2")
+     kapt("com.google.dagger:hilt-android-compiler:2.44.2")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.5.2")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
+     ksp("androidx.room:room-compiler:2.5.2")
+
+    implementation("androidx.room:room-ktx:2.5.2")
+
+
+    //GSON convertir objetos que llegan en JSON hacia objetos  y
+    //Retrofit  Para hacer peticiones al server
+    implementation("com.squareup.retrofit2:retrofit:2.9.0:")
+    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0:")
+
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    //File transformation
+    implementation("commons-io:commons-io:2.7")
+
+    //
+    implementation("androidx.compose.material:material:$version")
+    implementation("androidx.compose.material3:material3:1.1.2")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

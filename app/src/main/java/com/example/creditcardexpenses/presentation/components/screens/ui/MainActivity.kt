@@ -1,4 +1,4 @@
-package com.example.creditcardexpenses
+package com.example.creditcardexpenses.presentation.components.screens.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,9 +10,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.creditcardexpenses.ui.theme.CreditCardExpensesTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.creditcardexpenses.presentation.components.screens.ui.theme.CreditCardExpensesTheme
+import com.example.creditcardexpenses.presentation.navigation.root.CreditCardsExpensesNavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var navController :NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +29,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    navController = rememberNavController()
+                    CreditCardsExpensesNavGraph(navController = navController)
                 }
             }
         }

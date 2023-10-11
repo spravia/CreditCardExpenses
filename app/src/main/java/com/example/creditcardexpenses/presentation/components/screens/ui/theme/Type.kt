@@ -1,4 +1,4 @@
-package com.example.creditcardexpenses.ui.theme
+package com.example.creditcardexpenses.presentation.components.screens.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

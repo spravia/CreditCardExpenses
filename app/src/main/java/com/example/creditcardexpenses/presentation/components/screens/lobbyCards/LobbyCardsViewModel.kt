@@ -27,12 +27,9 @@ class LobbyCardsViewModel @Inject constructor(private val cardsUseCases: CardsUs
 
     fun getCards() = viewModelScope.launch {
 
-       val result = cardsUseCases.getCardsUseCase().collect(){
-           cardsResponse = it
-           Log.d("CardsSavas","${cardsResponse}")
-
+       val result = cardsUseCases.getCardsUseCase().collect()
+            {
+               cardsResponse = it
        }
-
     }
-
 }

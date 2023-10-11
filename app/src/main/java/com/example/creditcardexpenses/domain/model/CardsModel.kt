@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 data class CardsModel(
     var id : Int = 0,
     var brand : String = "",
-    var alias : String = "",
-    var validThru : Int = 0,
-    var fourDigits : Int = 0,
+    var alias : String =  "",
+    var validThru : Int =  0,
+    var fourDigits : Int =  0,
     )

@@ -9,6 +9,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import com.example.creditcardexpenses.presentation.components.screens.lobbyCards.components.GetCards
 import com.example.creditcardexpenses.presentation.components.screens.lobbyCards.components.LobbyCardsContent
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.PurpleGrey80
 import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
@@ -30,7 +31,7 @@ fun ShowCards(navController: NavHostController){
     )
     { paddingValues ->
 
-        LobbyCardsContent(navController = navController, paddingValues = paddingValues)
+        GetCards(navController = navController, paddingValues = paddingValues)
 
     }
 }

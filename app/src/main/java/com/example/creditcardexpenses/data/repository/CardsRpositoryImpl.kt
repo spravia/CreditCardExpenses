@@ -15,8 +15,10 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
 
          cardDataSource.getCards().collect {
 
-            it.map {  cardEntity ->  cardEntity.toCardsModel() }
-            Log.d("CardsSavas","${it}")
+             it.run {
+                 val data = it.map {  cardEntity ->  cardEntity.toCardsModel() }
+                 emit(data)
+             }
          }
     }
 

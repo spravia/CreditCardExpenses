@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 class CardsLocalDataSourceImpl(private val cardsDAO: CardsDAO) : CardsLocalDataSource
 {
     override fun getCards(): Flow<List<cardEntity>> = cardsDAO.getCards()
+
     override suspend fun create(cardEntity: cardEntity) = cardsDAO.insert(cardEntity = cardEntity)
 
     override suspend fun update(id: Int, brand: String, alias: String, validThru: Int, fourDigits: Int) =

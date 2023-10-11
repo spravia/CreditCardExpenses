@@ -11,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.creditcardexpenses.domain.model.CardsModel
 import com.example.creditcardexpenses.presentation.components.screens.lobbyCards.LobbyCardsViewModel
 import com.example.creditcardexpenses.presentation.components.screens.util.CardBrands
 
 @Composable
-fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingValues, vm: LobbyCardsViewModel = hiltViewModel()){
-
-    val cards = listOf<String>("9999", "1934","7895","1541","7951")
+fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingValues , cards :List<CardsModel> )
+{
 
     Box(modifier = Modifier
         .padding(paddingValues = paddingValues)
@@ -34,7 +34,10 @@ fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingVa
         {
             items(items = cards)
             {
-                card(it,cardName = "VISA", marca = CardBrands.MASTER_CARD,valid = "4/26")
+               card(cardNumber = it.fourDigits.toString(),
+                    cardName = it.alias,
+                    marca = CardBrands.MASTER_CARD,
+                    valid = it.validThru.toString())
             }
         }
     }

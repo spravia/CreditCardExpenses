@@ -6,4 +6,10 @@ sealed class CreditCardsScreens(val route :String){
 
      object AddNew_Cards : CreditCardsScreens("addnew_cards")
 
+     object TransactionDetail : CreditCardsScreens("transactiondetail_cards/{idCard}")
+     {
+          fun passIdCard(idCard : String) : String = "transactiondetail_cards/$idCard"
+
+     }
+
 }

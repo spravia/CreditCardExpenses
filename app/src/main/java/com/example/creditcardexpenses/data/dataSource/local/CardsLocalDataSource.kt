@@ -7,6 +7,8 @@ interface CardsLocalDataSource {
 
         fun getCards() : Flow<List<cardEntity>>
 
+        suspend fun getCardById(id:Int) : cardEntity
+
         suspend fun create(cardEntity: cardEntity)
 
         suspend fun update(id:Int, brand:String, alias : String, validThru : Int, fourDigits :Int)

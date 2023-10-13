@@ -22,6 +22,12 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
          }
     }
 
+    override suspend fun findCardById(id: Int): CardsModel {
+
+        return cardDataSource.getCardById(id).toCardsModel()
+
+    }
+
     override suspend fun create(cardEntity: cardEntity) {
         try {
             cardDataSource.create(cardEntity)

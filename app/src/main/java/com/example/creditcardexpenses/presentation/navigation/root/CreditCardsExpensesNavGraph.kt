@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 
 import com.example.creditcardexpenses.presentation.navigation.graph.Graph
 import com.example.creditcardexpenses.presentation.navigation.graph.creditCardsNavGraph
+import com.example.creditcardexpenses.presentation.navigation.graph.transactionCardNavGraph
 
 
 @Composable
@@ -16,7 +17,6 @@ fun CreditCardsExpensesNavGraph(navController: NavHostController){
              startDestination = Graph.LOBBY_CREDIT_CARDS ){
 
             creditCardsNavGraph(navController)
-
+            transactionCardNavGraph(navController)
      }
-
 }

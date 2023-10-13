@@ -34,10 +34,15 @@ fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingVa
         {
             items(items = cards)
             {
-               card(cardNumber = it.fourDigits.toString(),
+               card(
+                    idCard = it.id.toString(),
+                    cardNumber = it.fourDigits.toString(),
                     cardName = it.alias,
                     marca = CardBrands.MASTER_CARD,
-                    valid = it.validThru.toString())
+                    valid = it.validThru.toString(),
+                    runClick = true,
+                    navController = navController
+               )
             }
         }
     }

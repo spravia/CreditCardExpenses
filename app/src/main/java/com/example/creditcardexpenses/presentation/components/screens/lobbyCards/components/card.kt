@@ -24,29 +24,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.R
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Blue
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Gray
 import com.example.creditcardexpenses.presentation.components.screens.util.CardBrands
+import com.example.creditcardexpenses.presentation.navigation.graph.Graph
+import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun card(
+    idCard     : String? = "",
     cardNumber : String?     ,
     cardName   : String?     ,
     marca      : CardBrands? ,
     valid      : String?,
-    runClick   : Boolean?  = false
+    runClick   : Boolean?  = false,
+    navController: NavHostController
 ) {
 
 
     androidx.compose.material.Card(
-        onClick = { /*TODO*/ },
+        onClick = {
+            if (runClick == true)
+            {
+                navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(idCard ?: ""))
+            }
+        },
         modifier = Modifier
             .height(220.dp)
             .fillMaxWidth()
-            .padding(10.dp).clickable {  },
+            .padding(10.dp),
         elevation = 4.dp,
         shape = RoundedCornerShape(10.dp),
         //backgroundColor = Purple40
@@ -60,7 +70,7 @@ fun card(
         .background(
             brush = Brush.verticalGradient
                 (
-                colors = listOf( color, Color.White )
+                colors = listOf(color, Color.White)
             )
         ))
     {
@@ -105,7 +115,8 @@ fun card(
                 }
 
                 Image(
-                    modifier = Modifier.padding(top = 20.dp, start = 180.dp)
+                    modifier = Modifier
+                        .padding(top = 20.dp, start = 180.dp)
                         .width(30.dp)
                         .height(30.dp),
                     painter = painterResource(id = R.mipmap.contactless), contentDescription = ""

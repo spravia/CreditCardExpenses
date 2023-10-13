@@ -14,6 +14,9 @@ interface CardsDAO {
     @Query("Select * from cards")
     fun getCards() : Flow<List<cardEntity>>
 
+    @Query("Select * from cards WHERE id = :id")
+    suspend fun getCardById(id : Int) : cardEntity
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(cardEntity: cardEntity)
 

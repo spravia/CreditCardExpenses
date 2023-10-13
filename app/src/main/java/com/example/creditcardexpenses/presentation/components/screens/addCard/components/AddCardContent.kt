@@ -76,10 +76,12 @@ fun AddCardContent(navController: NavHostController,  paddingValues: PaddingValu
 
             Column(modifier = Modifier.padding(top = 30.dp)) {
                 card(
+                    idCard = "",
                     cardNumber = state.cardNumber,
                     cardName = state.alias,
                     marca = state.marca,
-                    valid = state.validThru
+                    valid = state.validThru,
+                    navController = navController
                 )
             }
 
@@ -149,7 +151,6 @@ fun AddCardContent(navController: NavHostController,  paddingValues: PaddingValu
         }
     }
 }
-
 
 
 

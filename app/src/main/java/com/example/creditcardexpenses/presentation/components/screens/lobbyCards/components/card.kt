@@ -3,7 +3,6 @@ package com.example.creditcardexpenses.presentation.components.screens.lobbyCard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,9 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.R
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Blue
-import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Gray
 import com.example.creditcardexpenses.presentation.components.screens.util.CardBrands
-import com.example.creditcardexpenses.presentation.navigation.graph.Graph
 import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
 
@@ -39,7 +36,7 @@ fun card(
     idCard     : String? = "",
     cardNumber : String?     ,
     cardName   : String?     ,
-    marca      : CardBrands? ,
+    marca      : String? = CardBrands.NONE_CARD.brand ,
     valid      : String?,
     runClick   : Boolean?  = false,
     navController: NavHostController
@@ -56,14 +53,14 @@ fun card(
         modifier = Modifier
             .height(220.dp)
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(bottom = 10.dp),
         elevation = 4.dp,
         shape = RoundedCornerShape(10.dp),
         //backgroundColor = Purple40
     ) {
 
 
-    val color =  if(marca == null || marca == CardBrands.AMERICAN_EXPRESS) Color.Gray else Blue
+    val color =  if(marca == null || marca == CardBrands.AMERICAN_EXPRESS.brand) Color.Gray else Blue
 
     Row( modifier = Modifier
         .fillMaxSize()
@@ -81,7 +78,7 @@ fun card(
             Row(horizontalArrangement = Arrangement.SpaceBetween)
             {
                 when (marca) {
-                    CardBrands.VISA ->
+                    CardBrands.VISA.brand ->
                         Image(
                             modifier = Modifier
                                 .width(80.dp)
@@ -91,7 +88,7 @@ fun card(
                             contentDescription = ""
                         )
 
-                    CardBrands.MASTER_CARD ->
+                    CardBrands.MASTER_CARD.brand ->
                         Image(
                             modifier = Modifier
                                 .width(80.dp)
@@ -101,7 +98,7 @@ fun card(
                             contentDescription = ""
                         )
 
-                    CardBrands.AMERICAN_EXPRESS ->
+                    CardBrands.AMERICAN_EXPRESS.brand ->
                         Image(
                             modifier = Modifier
                                 .width(80.dp)
@@ -116,7 +113,7 @@ fun card(
 
                 Image(
                     modifier = Modifier
-                        .padding(top = 20.dp, start = 180.dp)
+                        .padding(top = 20.dp, start = 140.dp)
                         .width(30.dp)
                         .height(30.dp),
                     painter = painterResource(id = R.mipmap.contactless), contentDescription = ""

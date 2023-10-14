@@ -79,7 +79,7 @@ fun AddCardContent(navController: NavHostController,  paddingValues: PaddingValu
                     idCard = "",
                     cardNumber = state.cardNumber,
                     cardName = state.alias,
-                    marca = state.marca,
+                    marca = state.marca?.brand,
                     valid = state.validThru,
                     navController = navController
                 )
@@ -143,7 +143,7 @@ fun AddCardContent(navController: NavHostController,  paddingValues: PaddingValu
                         )
 
 
-                        Spacer(modifier = Modifier.height(100.dp))
+                        Spacer(modifier = Modifier.height(20.dp))
                     }
 
                 }

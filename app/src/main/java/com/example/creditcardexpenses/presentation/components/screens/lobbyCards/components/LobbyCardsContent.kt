@@ -38,7 +38,7 @@ fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingVa
                     idCard = it.id.toString(),
                     cardNumber = it.fourDigits.toString(),
                     cardName = it.alias,
-                    marca = CardBrands.MASTER_CARD,
+                    marca = it.brand,
                     valid = it.validThru.toString(),
                     runClick = true,
                     navController = navController

@@ -3,6 +3,7 @@ package com.example.creditcardexpenses.di
 import com.example.creditcardexpenses.domain.repository.CardsRepository
 import com.example.creditcardexpenses.domain.useCase.CardsUseCases
 import com.example.creditcardexpenses.domain.useCase.CreateCardUseCase
+import com.example.creditcardexpenses.domain.useCase.DeleteCardUseCase
 import com.example.creditcardexpenses.domain.useCase.GetCardByIdUseCase
 import com.example.creditcardexpenses.domain.useCase.GetCardsUseCase
 import dagger.Module
@@ -18,6 +19,7 @@ object UseCaseModulo {
     fun provideCardsUseCase(repository: CardsRepository) =
            CardsUseCases(getCardsUseCase = GetCardsUseCase(repository),
                          createCardUseCase = CreateCardUseCase(repository),
-                         getCardById = GetCardByIdUseCase(repository)
+                         getCardById = GetCardByIdUseCase(repository),
+                         deleteCard = DeleteCardUseCase(repository)
                )
 }

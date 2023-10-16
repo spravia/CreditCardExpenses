@@ -42,6 +42,11 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
     }
 
     override suspend fun delete(id: Int) {
-        TODO("Not yet implemented")
+
+            try {
+                cardDataSource.delete(id)
+            }finally {
+
+            }
     }
 }

@@ -21,8 +21,11 @@ class TansactionListViewModel @Inject constructor(
 {
 
    val idCard = savedStateHandle.get<String>("idCard")
+
    var cardData by mutableStateOf<CardsModel?>(null)
        private set
+
+   var errorMessage by mutableStateOf("")
 
    init {
         getCardById()
@@ -32,6 +35,14 @@ class TansactionListViewModel @Inject constructor(
 
         cardData = useCases.getCardById(idCard!!.toInt())
 
+    }
+
+    fun deleteCard() = viewModelScope.launch {
+
+        try {
+            useCases.deleteCard(idCard!!.toInt())
+            errorMessage = "Card deleted"
+        }finally {  }
     }
 
 }

@@ -15,4 +15,9 @@ val Blue = Color(0xFF2196F3)
 
 val Blue2 = Color(0xFF8EC2EB)
 
-val Gray = Color(0xFF4B4E5E)
+val Gray = Color(0xFFBDBFCA)
+
+val Color10 = Color(red = 230, green = 225, blue = 203, alpha = 255)
+
+
+

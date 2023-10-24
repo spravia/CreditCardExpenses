@@ -24,6 +24,8 @@ object DatabaseRoomModule {
             .fallbackToDestructiveMigration()
             .build()
 
+
+
     @Provides
     @Singleton
     fun provideCardsDao(db : CardsDB) : CardsDAO = db.cardsDAO()

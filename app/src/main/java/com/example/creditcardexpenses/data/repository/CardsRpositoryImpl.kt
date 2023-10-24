@@ -13,25 +13,28 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
 {
     override fun findAll(): Flow<List<CardsModel>> = flow {
 
-         cardDataSource.getCards().collect {
+        try {
+            cardDataSource.getCards().collect {
 
-             it.run {
-                 val data = it.map {  cardEntity ->  cardEntity.toCardsModel() }
-                 emit(data)
-             }
-         }
+                it.run {
+                    val data = it.map {  cardEntity ->  cardEntity.toCardsModel() }
+                    emit(data)
+                }
+            }
+        }catch (_:Exception){
+
+        }
     }
 
-    override suspend fun findCardById(id: Int): CardsModel {
-
-        return cardDataSource.getCardById(id).toCardsModel()
-
+    override suspend fun findCardById(id: Int): CardsModel
+    {
+       return cardDataSource.getCardById(id).toCardsModel()
     }
 
     override suspend fun create(cardEntity: cardEntity) {
         try {
             cardDataSource.create(cardEntity)
-        }finally {
+        }catch (_:Exception){
 
         }
     }
@@ -45,7 +48,7 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
 
             try {
                 cardDataSource.delete(id)
-            }finally {
+            }catch (_:Exception){
 
             }
     }

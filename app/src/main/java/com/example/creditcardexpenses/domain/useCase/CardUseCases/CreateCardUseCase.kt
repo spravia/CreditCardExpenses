@@ -1,4 +1,4 @@
-package com.example.creditcardexpenses.domain.useCase
+package com.example.creditcardexpenses.domain.useCase.CardUseCases
 
 import com.example.creditcardexpenses.data.dataSource.local.entity.cardEntity
 import com.example.creditcardexpenses.domain.repository.CardsRepository

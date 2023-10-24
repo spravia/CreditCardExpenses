@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TansactionListViewModel @Inject constructor(
-                private val useCases: CardsUseCases,
-                private val savedStateHandle: SavedStateHandle
+    private val useCases: CardsUseCases,
+    private val savedStateHandle: SavedStateHandle
 
      ) : ViewModel()
 {

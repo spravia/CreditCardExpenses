@@ -6,8 +6,10 @@ import com.example.creditcardexpenses.data.dataSource.local.entity.cardEntity
 import com.example.creditcardexpenses.data.dataSource.local.mapper.toCardsModel
 import com.example.creditcardexpenses.domain.model.CardsModel
 import com.example.creditcardexpenses.domain.repository.CardsRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
 class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : CardsRepository
 {
@@ -24,7 +26,7 @@ class CardsRpositoryImpl(private val cardDataSource : CardsLocalDataSource) : Ca
         }catch (_:Exception){
 
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun findCardById(id: Int): CardsModel
     {

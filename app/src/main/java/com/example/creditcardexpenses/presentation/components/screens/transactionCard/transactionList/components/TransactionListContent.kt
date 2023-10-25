@@ -3,6 +3,7 @@ package com.example.creditcardexpenses.presentation.components.screens.transacti
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -40,7 +41,8 @@ import com.example.creditcardexpenses.presentation.components.screens.ui.theme.C
 import com.example.creditcardexpenses.presentation.navigation.graph.Graph
 
 @Composable
-fun TransactionListContent(navController: NavHostController,
+fun TransactionListContent( paddingValues: PaddingValues,
+                           navController: NavHostController,
                            vm: TansactionListViewModel = hiltViewModel(),
 
 )

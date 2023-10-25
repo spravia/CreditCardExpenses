@@ -4,7 +4,10 @@ import android.app.Application
 import androidx.room.Room
 import com.example.creditcardexpenses.data.dataSource.local.CardsLocalDataSource
 import com.example.creditcardexpenses.data.dataSource.local.CardsLocalDataSourceImpl
+import com.example.creditcardexpenses.data.dataSource.local.TransacionsLocalDataSourceImpl
+import com.example.creditcardexpenses.data.dataSource.local.TransactionsLocalDataSource
 import com.example.creditcardexpenses.data.dataSource.local.dao.CardsDAO
+import com.example.creditcardexpenses.data.dataSource.local.dao.TransactionDAO
 import com.example.creditcardexpenses.data.dataSource.local.db.CardsDB
 import dagger.Module
 import dagger.Provides
@@ -33,4 +36,12 @@ object DatabaseRoomModule {
     fun provideCardsLocalDataSource(cardsDAO: CardsDAO) : CardsLocalDataSource = CardsLocalDataSourceImpl(cardsDAO)
 
 
+    @Provides
+    @Singleton
+    fun provideTransactionDAO(db: CardsDB) : TransactionDAO = db.transactionDAO()
+
+    @Provides
+    @Singleton
+    fun provideTransactionLocalDataSource(transactionDAO: TransactionDAO) : TransactionsLocalDataSource =
+        TransacionsLocalDataSourceImpl(transactionDAO)
 }

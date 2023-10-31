@@ -18,15 +18,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardViewModel
 
 //TODO https://www.youtube.com/watch?v=mJiPQx9483M
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CurrencyDropDownList()
+fun CurrencyDropDownList(vm : AddTransactionCardViewModel)
 {
 
-    val brandList = listOf("CRC", "USD")
+    val brandList = listOf(CurrencyList.Dollar.currency, CurrencyList.Colones.currency)
     var expanded by remember { mutableStateOf(false) }
     var selected by remember {  mutableStateOf("") }
 
@@ -56,6 +57,7 @@ fun CurrencyDropDownList()
                       onClick = {
                                 selected = item
                                 expanded = false
+                                vm.validCurrencyInput(item)
                       }
                   )
                 }

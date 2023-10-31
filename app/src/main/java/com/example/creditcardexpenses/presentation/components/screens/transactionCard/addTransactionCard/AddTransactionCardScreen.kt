@@ -8,7 +8,7 @@ import com.example.creditcardexpenses.presentation.components.screens.transactio
 @Composable
 fun AddTransactionCardScreen(navController: NavHostController, idCard:String){
 
-    AddTransactionCardContent()
+    AddTransactionCardContent(navController)
 
 
 }

@@ -17,10 +17,10 @@ class TransactionsRpositoryImpl(private val transactionsLocalDataSource: Transac
 
         transactionsLocalDataSource.getTransactionsByCardId(cardId=cardId).collect()
         {
-                it.run {
+            it.run {
 
                     val data = it.map { transactionEntity -> transactionEntity.toTransactionModel() }
-                    data.sortedByDescending { it.trxdate }
+                                 .sortedByDescending { it.trxdate }
                     emit(data)
                 }
         }

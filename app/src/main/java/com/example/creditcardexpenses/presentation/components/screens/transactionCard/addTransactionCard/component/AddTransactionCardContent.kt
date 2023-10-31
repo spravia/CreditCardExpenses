@@ -1,5 +1,6 @@
 package com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,19 +13,30 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardViewModel
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Color10
 
 @Composable
-fun AddTransactionCardContent(vm : AddTransactionCardViewModel = hiltViewModel())
+fun AddTransactionCardContent(navController: NavHostController ,vm : AddTransactionCardViewModel = hiltViewModel())
 {
+      val context = LocalContext.current
+
+      LaunchedEffect(key1 = vm.errorMessage){
+            if(vm.errorMessage != ""){
+                  Toast.makeText(context, vm.errorMessage, Toast.LENGTH_SHORT).show()
+                  vm.errorMessage = ""
+            }
+      }
 
       Box(modifier = Modifier
             .fillMaxSize()
@@ -67,7 +79,7 @@ fun AddTransactionCardContent(vm : AddTransactionCardViewModel = hiltViewModel()
                         }
                   }
 
-                  AddTransactionDetail(vm)
+                  AddTransactionDetail( navController, vm)
 
             }
       }

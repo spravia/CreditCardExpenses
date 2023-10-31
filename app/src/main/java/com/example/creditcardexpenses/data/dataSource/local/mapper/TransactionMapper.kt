@@ -8,7 +8,7 @@ fun TransactionEntity.toTransactionModel() : TransactionsModel
     return TransactionsModel(
         id = id,
         storename = storename,
-        trxdate = trxdate.toInt(),
+        trxdate = trxdate,
         trxamount = trxamount,
         trxcurrency = trxcurrency,
         cardId = cardId
@@ -20,7 +20,7 @@ fun TransactionsModel.toTransactionEntity() : TransactionEntity
     return TransactionEntity(
         id = id,
         storename = storename,
-        trxdate = trxdate.toString(),
+        trxdate = trxdate,
         trxamount = trxamount,
         trxcurrency = trxcurrency,
         cardId = cardId

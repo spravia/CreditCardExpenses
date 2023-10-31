@@ -16,11 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardViewModel
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Gray
+import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
 @Composable
-fun AddTransactionDetail(vm : AddTransactionCardViewModel)
+fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionCardViewModel)
 {
     val state = vm.transactionsModel
 
@@ -56,7 +58,7 @@ fun AddTransactionDetail(vm : AddTransactionCardViewModel)
                 label = { Text(text = "Store Name") }
             )
 
-            CurrencyDropDownList()
+            CurrencyDropDownList(vm)
 
             OutlinedTextField(
                 value = state.trxamount.toString(),
@@ -67,8 +69,11 @@ fun AddTransactionDetail(vm : AddTransactionCardViewModel)
                 label = { Text(text = "Amount") }
             )
 
-            ElevatedButton(onClick = { /*TODO*/ } ,
-                modifier = Modifier.padding(16.dp)
+            ElevatedButton(onClick = {
+                                       vm.saveTransaction()
+                                       navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(vm.cardIdTrx ?: ""))
+                                     } ,
+                           modifier = Modifier.padding(16.dp)
             )
             {
                 Text(text = "Save")

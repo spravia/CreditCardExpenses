@@ -63,7 +63,7 @@ class AddTransactionCardViewModel @Inject constructor (
     private fun allDataFormIsValid() : Boolean
     {
 
-        if(transactionsModel.storename == "" || transactionsModel.storename == null) {
+        if(transactionsModel.storename == "") {
             errorMessage = "Digit a store name"
             return false
         }

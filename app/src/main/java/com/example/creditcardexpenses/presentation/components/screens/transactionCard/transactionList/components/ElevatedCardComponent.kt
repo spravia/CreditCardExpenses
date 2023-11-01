@@ -15,11 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component.CurrencyList
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.TansactionListViewModel
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Color10
+import java.text.DecimalFormat
 
 @Composable
-fun ElevatedCardComponent()
+fun ElevatedCardComponent(vm: TansactionListViewModel)
 {
+
+    val format = DecimalFormat("#.00")
 
     ElevatedCard(modifier = Modifier
         .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 10.dp)
@@ -29,22 +34,22 @@ fun ElevatedCardComponent()
         colors = CardDefaults.cardColors(Color10)
     )
     {
-        Row(modifier = Modifier.padding(start = 25.dp, end = 5.dp, top = 5.dp))
+        Row(modifier = Modifier.padding( end = 5.dp, top = 5.dp))
         {
 
             Column(modifier = Modifier
                 .padding()
-                .fillMaxHeight() , horizontalAlignment = Alignment.CenterHorizontally)
+                .weight(1f) , horizontalAlignment = Alignment.CenterHorizontally)
             {
                 Text(text = "Dollar Balance" , fontSize = 15.sp)
-                Text(text = "$ 5000.00", fontWeight = FontWeight.Bold )
+                Text(text = "${CurrencyList.Dollar.currency} ${format.format(vm.totalBalance.DollarBalance)}", fontWeight = FontWeight.Bold )
             }
             Column(modifier = Modifier
-                .padding(start = 115.dp)
-                .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally)
+                .padding()
+                .weight(1f), horizontalAlignment = Alignment.CenterHorizontally)
             {
                 Text(text = "Local Balance" ,  fontSize = 15.sp  )
-                Text(text = "₡ 5000.00", fontWeight = FontWeight.Bold  )
+                Text(text = "${CurrencyList.Colones.currency} ${format.format(vm.totalBalance.LocalBalance)}", fontWeight = FontWeight.Bold  )
             }
 
         }

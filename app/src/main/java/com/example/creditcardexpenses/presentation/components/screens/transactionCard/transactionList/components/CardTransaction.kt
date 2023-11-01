@@ -15,10 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.creditcardexpenses.domain.model.TransactionsModel
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.TansactionListViewModel
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Gray
 
 @Composable
-fun CardTransaction()
+fun CardTransaction(transactionList: List<TransactionsModel>, vm: TansactionListViewModel)
 {
 
     Card(
@@ -39,13 +41,13 @@ fun CardTransaction()
 
         Spacer(modifier = Modifier.height(15.dp))
 
-        val descriptions = listOf("Netflix","Amazon","Apple Bill","Netflix","Amazon","Apple Bill","Netflix","Amazon","Apple Bill","Netflix","Amazon","Apple Bill")
-
-        LazyColumn( )
-        {
-            items(items = descriptions)
+        transactionList?.let {
+            LazyColumn( )
             {
-               transactionDetail ->  CardTransactionDetail(description = transactionDetail)
+                items(items = transactionList)
+                { transactionDetail ->
+                    CardTransactionDetail(transactionsModel = transactionDetail)
+                }
             }
         }
     }

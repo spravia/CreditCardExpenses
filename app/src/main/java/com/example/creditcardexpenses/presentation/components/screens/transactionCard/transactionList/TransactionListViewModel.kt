@@ -14,6 +14,7 @@ import com.example.creditcardexpenses.domain.useCase.TransactionsUseCases
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component.CurrencyList
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component.TotalBalance
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -77,6 +78,17 @@ class TansactionListViewModel @Inject constructor(
             useCases.deleteCard(idCard!!.toInt())
             errorMessage = "Card deleted"
         }finally {  }
+    }
+
+
+    fun deleteTransactionById(id:Int) = viewModelScope.launch {
+
+        errorMessage = try {
+            trxUseCases.deleteTransactionById(id = id)
+            "Transaction deleted"
+        }catch (_ : Exception){
+            "An error while deleting transaction"
+        }
     }
 
 }

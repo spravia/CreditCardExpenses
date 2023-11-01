@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.TansactionListViewModel
+
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.Color10
 import com.example.creditcardexpenses.presentation.navigation.graph.Graph
 
@@ -61,7 +62,7 @@ fun TransactionListContent( paddingValues: PaddingValues,
 
    Box(modifier = Modifier
        .fillMaxSize()
-       .padding())
+       .padding(paddingValues=paddingValues))
    {
 
         Column(modifier = Modifier.padding())
@@ -131,11 +132,11 @@ fun TransactionListContent( paddingValues: PaddingValues,
                    }
                 }
 
-                ElevatedCardComponent()
+                ElevatedCardComponent(vm)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                CardTransaction()
+                vm.transactionList?.let { CardTransaction(it, vm) }
         }
    }
 

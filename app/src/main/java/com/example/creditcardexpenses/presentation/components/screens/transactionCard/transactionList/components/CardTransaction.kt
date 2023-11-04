@@ -35,7 +35,8 @@ fun CardTransaction(transactionList: List<TransactionsModel>, vm: TansactionList
 
         Text(modifier = Modifier
             .padding(top = 5.dp)
-            .padding(horizontal = 140.dp),
+            .padding(horizontal = 100.dp)
+                 ,
             text = "Transactions", fontSize = 17.sp
         )
 

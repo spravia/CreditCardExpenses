@@ -44,8 +44,7 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
 
 
             Text(modifier = Modifier
-                .padding(top = 5.dp, bottom = 35.dp)
-                .padding(horizontal = 80.dp),
+                .padding(top = 5.dp, bottom = 35.dp),
                 text = "Enter Transaction Detail", fontSize = 17.sp
             )
 

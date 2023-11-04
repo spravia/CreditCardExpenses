@@ -20,6 +20,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -73,7 +75,7 @@ fun TransactionListContent( paddingValues: PaddingValues,
                     .height(130.dp)
                     .fillMaxWidth(),
                     elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-                    colors = CardDefaults.cardColors(Color10)
+                    colors = CardDefaults.cardColors(Color.White)
                 )
                 {
 
@@ -101,11 +103,15 @@ fun TransactionListContent( paddingValues: PaddingValues,
                        Column(modifier = Modifier
                            .padding()
                            .fillMaxHeight()
-                           .fillMaxWidth())
+                           .fillMaxWidth()
+                            )
                        {
-                           IconButton(onClick = { extended = true } , modifier = Modifier.padding(start = 115.dp, top = 70.dp) )
+                           IconButton(onClick = { extended = true } ,
+                                    modifier = Modifier.padding(start = 60.dp, top = 70.dp),
+
+                           )
                            {
-                               Icon(Icons.Default.MoreVert, contentDescription = "")
+                               Icon(Icons.Default.MoreVert, contentDescription = "", tint = Color.Black)
                            }
 
                            DropdownMenu(expanded = extended,

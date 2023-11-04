@@ -53,6 +53,9 @@ class TansactionListViewModel @Inject constructor(
 
             if (transactionList !=null) {
 
+                totalBalance = totalBalance.copy(LocalBalance = 0.00)
+                totalBalance = totalBalance.copy(DollarBalance = 0.00)
+
                 transactionList?.forEach() {
                     when (it.trxcurrency)
                     {
@@ -75,8 +78,9 @@ class TansactionListViewModel @Inject constructor(
     fun deleteCard() = viewModelScope.launch {
 
         try {
-            useCases.deleteCard(idCard!!.toInt())
-            errorMessage = "Card deleted"
+            idCard?.let { trxUseCases.deleteTransactionsByCardId(it.toInt()) }
+            idCard?.let { useCases.deleteCard(it.toInt()) }
+            errorMessage = "Card and transactions were deleted"
         }finally {  }
     }
 

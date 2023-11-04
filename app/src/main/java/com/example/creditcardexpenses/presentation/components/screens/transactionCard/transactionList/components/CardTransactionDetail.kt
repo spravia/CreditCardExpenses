@@ -1,5 +1,6 @@
 package com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,8 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.creditcardexpenses.domain.model.TransactionsModel
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component.CurrencyList
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.TansactionListViewModel
 import java.text.DecimalFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -35,7 +38,7 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 @Composable
-fun CardTransactionDetail(transactionsModel: TransactionsModel)
+fun CardTransactionDetail(transactionsModel: TransactionsModel, vm: TansactionListViewModel = hiltViewModel())
 {
 
     val format = DecimalFormat("#.00")
@@ -58,8 +61,8 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel)
             {
                val(mes, dia) = convertDate(transactionsModel.trxdate.substring(0,8))
 
-                Text(text = transactionsModel.storename.trimEnd(), fontWeight = FontWeight.Bold)
-                Text(text = "${dia}, ${transactionsModel.trxdate.substring(6,8)} ${mes}")
+                Text(text = transactionsModel.storename.trimEnd(), fontWeight = FontWeight.Bold , color = Color.Gray)
+                Text(text = "${dia}, ${transactionsModel.trxdate.substring(6,8)} ${mes}", color = Color.Gray)
             }
 
             Column(modifier = Modifier
@@ -78,7 +81,7 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel)
                 .padding(start = 20.dp)
                 .size(20.dp) )
             {
-                Icon(Icons.Default.MoreVert, contentDescription = "")
+                Icon(Icons.Default.MoreVert, contentDescription = "", tint = Color.Black)
             }
 
             DropdownMenu(expanded = extended, onDismissRequest = { extended = false }
@@ -93,8 +96,7 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel)
                 DropdownMenuItem(
                     text = { Text(text = "Delete") },
                     onClick = {
-
-
+                                vm.deleteTransactionById(transactionsModel.id)
                               },
                     leadingIcon = { Icon(Icons.Default.Delete, contentDescription = "") }
                 )
@@ -105,21 +107,22 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel)
 }
 
 
+@SuppressLint("SuspiciousIndentation")
 private fun convertDate(date : String) : Pair<String, String>
 {
 
     val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
 
-        try {
-            val fecha = LocalDate.parse(date, formatter)
-            val month = fecha.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
-                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
-                .substring(0,3)
-            val day = fecha.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
-                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
-                .substring(0,3)
-            return Pair(month, day)
-        }catch (_ : Exception){
-            return Pair("Unknown","Unknown")
-        }
+    return try {
+        val fecha = LocalDate.parse(date, formatter)
+        val month = fecha.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+            .substring(0,3)
+        val day = fecha.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+            .substring(0,3)
+        Pair(month, day)
+    }catch (_ : Exception){
+        Pair("Unknown","Unknown")
+    }
 }

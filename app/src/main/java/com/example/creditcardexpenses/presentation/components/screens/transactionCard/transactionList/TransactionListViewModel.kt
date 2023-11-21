@@ -91,7 +91,7 @@ class TansactionListViewModel @Inject constructor(
             trxUseCases.deleteTransactionById(id = id)
             "Transaction deleted"
         }catch (_ : Exception){
-            "An error while deleting transaction"
+            "An error ocurred while deleting transaction"
         }
     }
 

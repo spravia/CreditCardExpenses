@@ -91,6 +91,9 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
+    //splash
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
+
     //File transformation
     implementation("commons-io:commons-io:2.7")
 

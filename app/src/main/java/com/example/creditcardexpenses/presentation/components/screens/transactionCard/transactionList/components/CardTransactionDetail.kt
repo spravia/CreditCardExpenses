@@ -90,7 +90,7 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel, vm: TansactionLi
                 DropdownMenuItem(
                     text = { Text(text = "Edit") },
                     onClick = { extended = false },
-                    leadingIcon = { Icon(Icons.Default.Edit, contentDescription = "") }
+                    leadingIcon = { Icon(Icons.Default.Edit, contentDescription = "", tint = Color.Black) }
                 )
 
                 DropdownMenuItem(
@@ -98,7 +98,7 @@ fun CardTransactionDetail(transactionsModel: TransactionsModel, vm: TansactionLi
                     onClick = {
                                 vm.deleteTransactionById(transactionsModel.id)
                               },
-                    leadingIcon = { Icon(Icons.Default.Delete, contentDescription = "") }
+                    leadingIcon = { Icon(Icons.Default.Delete, contentDescription = "", tint = Color.Black) }
                 )
             }
 

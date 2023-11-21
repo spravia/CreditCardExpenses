@@ -1,6 +1,5 @@
 package com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard
 
-import android.icu.text.DateFormat
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -35,9 +34,10 @@ class AddTransactionCardViewModel @Inject constructor (
 
    val cardIdTrx = savedStateHandle.get<String>("idCardTrx")
 
-    var transactionsModel by mutableStateOf( TransactionsModel(id = 0, storename = "", trxcurrency = "", cardId = 0, trxamount = .00, trxdate = ""))
+    var transactionsModel by mutableStateOf( TransactionsModel(id = 0, storename = "", trxcurrency = "", cardId = 0, trxamount = 0.0, trxdate = ""))
         private set
 
+    var amountTrx by mutableStateOf("")
 
     init {
         getCardById()
@@ -52,12 +52,15 @@ class AddTransactionCardViewModel @Inject constructor (
         }
     }
 
-    fun saveTransaction() = viewModelScope.launch {
-        if (allDataFormIsValid())
-        {
-          transactionUseCases.insertTransaction(transactionsModel.toTransactionEntity() )
-          errorMessage = "Transaction added"
-        }
+    fun saveTransaction() : Boolean
+    {
+        return if (allDataFormIsValid()) {
+            viewModelScope.launch {
+                transactionUseCases.insertTransaction(transactionsModel.toTransactionEntity())
+                errorMessage = "Transaction added"
+            }
+            true
+        }else false
     }
 
     private fun allDataFormIsValid() : Boolean
@@ -99,9 +102,9 @@ class AddTransactionCardViewModel @Inject constructor (
         try {
 
             transactionsModel = transactionsModel.copy(trxamount = input.toDouble())
+            amountTrx = input
 
         }catch (_ : Exception){
-
 
         }
 

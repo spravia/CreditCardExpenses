@@ -12,6 +12,7 @@ import androidx.navigation.NavHostController
 import com.example.creditcardexpenses.presentation.components.screens.addCard.components.AddCardContent
 import com.example.creditcardexpenses.presentation.components.screens.ui.theme.PurpleGrey80
 import com.example.creditcardexpenses.presentation.navigation.graph.Graph
+import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
 @Composable
 fun AddCardScreen(navController: NavHostController, vm: AddCardViewModel = hiltViewModel()){
@@ -23,6 +24,9 @@ fun AddCardScreen(navController: NavHostController, vm: AddCardViewModel = hiltV
                 text = {  Text(text = "Save") },
                 onClick = { vm.saveCard()
                             navController.navigate(route = Graph.LOBBY_CREDIT_CARDS)
+                               {
+                                   popUpTo(CreditCardsScreens.AddNew_Cards.route) {inclusive=true}
+                               }
                           },
                 icon ={ Icon(Icons.Filled.Add,"") },
                 backgroundColor = PurpleGrey80

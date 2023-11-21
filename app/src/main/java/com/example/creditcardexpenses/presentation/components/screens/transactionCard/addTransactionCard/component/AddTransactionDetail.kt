@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -60,17 +62,29 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
             CurrencyDropDownList(vm)
 
             OutlinedTextField(
-                value = state.trxamount.toString(),
-                onValueChange = { vm.validIntputTrxAmount(it) },
+                //value = state.trxamount.toString(),
+                value = vm.amountTrx,
+                onValueChange = {
+
+                    if (it.isNotBlank() && it.toDouble() != null)
+                    {
+                       vm.validIntputTrxAmount(it)
+                    }else if(it.isBlank()) vm.amountTrx = ""
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp, bottom = 50.dp),
-                label = { Text(text = "Amount") }
+                label = { Text(text = "0.00") },
+
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
             ElevatedButton(onClick = {
-                                       vm.saveTransaction()
-                                       navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(vm.cardIdTrx ?: ""))
+                                       if(vm.saveTransaction())
+                                       {
+                                           navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(vm.cardIdTrx ?: ""))
+                                           { popUpTo(CreditCardsScreens.AddTransactionCard.route) {inclusive=true} }
+                                       }
                                      } ,
                            modifier = Modifier.padding(16.dp)
             )

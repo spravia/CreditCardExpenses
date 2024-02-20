@@ -91,7 +91,7 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    //splash
+    //splash screen
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
     //File transformation
@@ -101,11 +101,35 @@ dependencies {
     implementation("androidx.compose.material:material:$version")
     implementation("androidx.compose.material3:material3:1.1.2")
 
+    //TODO  **************** TESTING **********************
+
     testImplementation("junit:junit:4.13.2")
+    testImplementation("com.google.truth:truth:1.0.1")
+    androidTestImplementation("com.google.truth:truth:1.0.1")
+
+    // Assertions
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.ext:truth:1.5.0")
+
+    // Espresso dependencies
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation( "androidx.test.espresso:espresso-contrib:3.5.1")
+    androidTestImplementation( "androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation( "androidx.test.espresso:espresso-accessibility:3.5.1")
+    androidTestImplementation( "androidx.test.espresso:espresso-web:3.5.1")
+    androidTestImplementation( "androidx.test.espresso.idling:idling-concurrent:3.5.1")
+
+    // Core library
+    androidTestImplementation("androidx.test:core:1.5.0")
+
+    // AndroidJUnitRunner and JUnit Rules
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
+
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
 }

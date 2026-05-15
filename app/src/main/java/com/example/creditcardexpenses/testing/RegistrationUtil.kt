@@ -1,6 +1,9 @@
 package com.example.creditcardexpenses.testing
-
+//TODO Testing
 //https://www.youtube.com/playlist?list=PLQkwcJG4YTCSYJ13G4kVIJ10X5zisB2Lq
+//Part3              RegistrationUtilTest
+//Before and After   ResourceComparerTest
+//
 
 
 

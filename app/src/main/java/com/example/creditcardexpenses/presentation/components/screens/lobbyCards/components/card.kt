@@ -160,7 +160,7 @@ fun card(
 
 }
 
-@Preview
+
 @Composable
 fun previewCard(){
 

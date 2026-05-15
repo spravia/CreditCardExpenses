@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     navController = rememberNavController()
                     CreditCardsExpensesNavGraph(navController = navController)
+
                 }
             }
         }

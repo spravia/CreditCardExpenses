@@ -10,5 +10,6 @@ fun AddTransactionCardScreen(navController: NavHostController, idCard:String){
 
     AddTransactionCardContent(navController)
 
-
 }
+
+

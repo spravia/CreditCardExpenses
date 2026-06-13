@@ -2,16 +2,7 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="ResourceComparerTest">
-        <State />
-      </entry>
       <entry key="app">
-        <State />
-      </entry>
-      <entry key="stringResourceDifferentAsGivenString_returnsFalse()">
-        <State />
-      </entry>
-      <entry key="stringResourceSameAsGivenString_returnsTrue()">
         <State />
       </entry>
     </value>

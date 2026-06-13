@@ -1,6 +1,5 @@
-package com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component
+package com.example.creditcardexpenses.presentation.components.screens.transactionCard.editTransactionCard.component
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -30,12 +29,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardViewModel
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.editTransactionCard.EditTransactionCardViewModel
 import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
 @Composable
-fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionCardViewModel)
-{
+fun EditTransactionDetail(navController: NavHostController, vm: EditTransactionCardViewModel) {
     val state = vm.transactionsModel
 
     Card(
@@ -46,18 +44,15 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
         shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    )
-    {
-
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
+        ) {
             Text(
-                text = "Transaction Details",
+                text = "Edit Transaction",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
@@ -90,7 +85,7 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
                     .padding(bottom = 8.dp)
             )
 
-            CurrencyDropDownList(vm)
+            EditCurrencyDropDownList(vm)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -117,9 +112,9 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
 
             Button(
                 onClick = {
-                    if (vm.saveTransaction()) {
-                        navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(vm.cardIdTrx ?: "")) {
-                            popUpTo(CreditCardsScreens.AddTransactionCard.route) { inclusive = true }
+                    if (vm.updateTransaction()) {
+                        navController.navigate(route = CreditCardsScreens.TransactionDetail.passIdCard(vm.cardData?.id.toString())) {
+                            popUpTo(CreditCardsScreens.EditTransactionCard.route) { inclusive = true }
                         }
                     }
                 },
@@ -130,7 +125,7 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6200EE))
             ) {
                 Text(
-                    text = "Confirm Transaction",
+                    text = "Update Transaction",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
@@ -138,5 +133,4 @@ fun AddTransactionDetail( navController: NavHostController, vm : AddTransactionC
             }
         }
     }
-
 }

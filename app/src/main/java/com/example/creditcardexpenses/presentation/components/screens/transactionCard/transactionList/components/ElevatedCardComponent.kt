@@ -1,11 +1,15 @@
 package com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
@@ -27,33 +31,62 @@ fun ElevatedCardComponent(vm: TansactionListViewModel)
 
     val format = DecimalFormat("#.00")
 
-    ElevatedCard(modifier = Modifier
-        .padding(start = 10.dp, end = 10.dp, top = 5.dp, bottom = 10.dp)
-        .height(60.dp)
-        .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.cardColors(Color10)
-    )
-    {
-        Row(modifier = Modifier.padding( end = 5.dp, top = 5.dp))
-        {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        BalanceItem(
+            modifier = Modifier.weight(1f),
+            label = "Dollar Balance",
+            amount = "${CurrencyList.Dollar.currency} ${format.format(vm.totalBalance.DollarBalance)}",
+            containerColor = Color(0xFFE8EAF6),
+            contentColor = Color(0xFF3F51B5)
+        )
+        BalanceItem(
+            modifier = Modifier.weight(1f),
+            label = "Local Balance",
+            amount = "${CurrencyList.Colones.currency} ${format.format(vm.totalBalance.LocalBalance)}",
+            containerColor = Color(0xFFE8F5E9),
+            contentColor = Color(0xFF4CAF50)
+        )
+    }
+}
 
-            Column(modifier = Modifier
-                .padding()
-                .weight(1f) , horizontalAlignment = Alignment.CenterHorizontally)
-            {
-                Text(text = "Dollar Balance" , fontSize = 15.sp , color= Color.Black)
-                Text(text = "${CurrencyList.Dollar.currency} ${format.format(vm.totalBalance.DollarBalance)}", fontWeight = FontWeight.Bold, color= Color.Black )
-            }
-            Column(modifier = Modifier
-                .padding()
-                .weight(1f), horizontalAlignment = Alignment.CenterHorizontally)
-            {
-                Text(text = "Local Balance" ,  fontSize = 15.sp , color= Color.Black )
-                Text(text = "${CurrencyList.Colones.currency} ${format.format(vm.totalBalance.LocalBalance)}", fontWeight = FontWeight.Bold , color= Color.Black )
-            }
-
+@Composable
+fun BalanceItem(
+    modifier: Modifier = Modifier,
+    label: String,
+    amount: String,
+    containerColor: Color,
+    contentColor: Color
+) {
+    ElevatedCard(
+        modifier = modifier.height(80.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        colors = CardDefaults.cardColors(containerColor = containerColor),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = label,
+                fontSize = 12.sp,
+                color = contentColor.copy(alpha = 0.8f),
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = amount,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = contentColor
+            )
         }
-
     }
 }

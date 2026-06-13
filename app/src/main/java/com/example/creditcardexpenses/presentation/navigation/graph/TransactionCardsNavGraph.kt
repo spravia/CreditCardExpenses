@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardScreen
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.editTransactionCard.EditTransactionCardScreen
 import com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.TransactionListScreen
 import com.example.creditcardexpenses.presentation.navigation.screen.CreditCardsScreens
 
@@ -42,6 +43,18 @@ fun NavGraphBuilder.transactionCardNavGraph(navController: NavHostController){
               backStackEntry ->
           backStackEntry.arguments?.getString("idCardTrx")?.let{
               AddTransactionCardScreen(navController = navController, it )
+          }
+      }
+
+      composable(route= CreditCardsScreens.EditTransactionCard.route,
+          arguments = listOf(navArgument("idTrx")
+          {  type = NavType.StringType }
+          )
+      )
+      {
+              backStackEntry ->
+          backStackEntry.arguments?.getString("idTrx")?.let{
+              EditTransactionCardScreen(navController = navController)
           }
       }
       }

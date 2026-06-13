@@ -21,13 +21,13 @@ fun LobbyCardsContent(navController: NavHostController,  paddingValues:PaddingVa
     Box(modifier = Modifier
         .padding(paddingValues = paddingValues)
         .fillMaxSize()
-        .background(Color.DarkGray)) {
+        .background(Color(0xFFF8F9FA))) {
 
         LazyColumn(
             modifier = Modifier.padding(
-                start = 20.dp,
-                end = 20.dp,
-                top = 20.dp,
+                start = 16.dp,
+                end = 16.dp,
+                top = 16.dp,
                 bottom = 55.dp
             )
         )

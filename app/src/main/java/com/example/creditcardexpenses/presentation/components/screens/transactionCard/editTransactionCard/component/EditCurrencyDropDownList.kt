@@ -1,5 +1,4 @@
-package com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component
-
+package com.example.creditcardexpenses.presentation.components.screens.transactionCard.editTransactionCard.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +15,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,17 +23,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.AddTransactionCardViewModel
-
-//TODO https://www.youtube.com/watch?v=mJiPQx9483M
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.addTransactionCard.component.CurrencyList
+import com.example.creditcardexpenses.presentation.components.screens.transactionCard.editTransactionCard.EditTransactionCardViewModel
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CurrencyDropDownList(vm : AddTransactionCardViewModel)
+fun EditCurrencyDropDownList(vm : EditTransactionCardViewModel)
 {
     val brandList = listOf(CurrencyList.Dollar.currency, CurrencyList.Colones.currency)
     var expanded by remember { mutableStateOf(false) }
     var selected by remember { mutableStateOf(vm.transactionsModel.trxcurrency) }
+
+    // Update selected when ViewModel changes (e.g. after loading)
+    LaunchedEffect(vm.transactionsModel.trxcurrency) {
+        selected = vm.transactionsModel.trxcurrency
+    }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -60,7 +64,7 @@ fun CurrencyDropDownList(vm : AddTransactionCardViewModel)
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxWidth(0.8f) // Adjusted width for better look
+            modifier = Modifier.fillMaxWidth(0.8f)
         )
         {
             brandList.forEach { item ->

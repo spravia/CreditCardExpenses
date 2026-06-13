@@ -1,6 +1,8 @@
 package com.example.creditcardexpenses.presentation.components.screens.transactionCard.transactionList.components
 
 import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -20,8 +23,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,9 +32,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -64,85 +68,108 @@ fun TransactionListContent( paddingValues: PaddingValues,
 
    Box(modifier = Modifier
        .fillMaxSize()
+       .background(Color(0xFFF8F9FA))
        .padding(paddingValues=paddingValues))
    {
 
         Column(modifier = Modifier.padding())
         {
 
-                ElevatedCard(modifier = Modifier
-                    .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp)
-                    .height(130.dp)
-                    .fillMaxWidth(),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-                    colors = CardDefaults.cardColors(Color.White)
-                )
-                {
-
-                   Row(modifier = Modifier.padding())
-                   {
-                       Column(modifier = Modifier
-                           .padding()
-                           .fillMaxHeight(), horizontalAlignment = Alignment.Start)
-                       {
-                           Text(text = "${vm.cardData?.alias}",
-                               modifier = Modifier.padding(start = 15.dp, top = 20.dp),
-                               fontSize = 25.sp,
-                               fontWeight = FontWeight.Light,
-                               color = Color.Black
-                           )
-
-                           Text(text = "****-****-****-${vm.cardData?.fourDigits}",
-                               modifier = Modifier.padding(start = 15.dp),
-                               fontSize = 20.sp,
-                               fontWeight = FontWeight.Bold,
-                               color = Color.Black
-                           )
-                       }
-
-                       Column(modifier = Modifier
-                           .padding()
-                           .fillMaxHeight()
-                           .fillMaxWidth()
+                // Modernized Credit Card Look
+                ElevatedCard(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .height(210.dp)
+                        .fillMaxWidth(),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                    shape = RoundedCornerShape(16.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(
+                                brush = Brush.linearGradient(
+                                    colors = listOf(Color(0xFF2C3E50), Color(0xFF000000))
+                                )
                             )
-                       {
-                           IconButton(onClick = { extended = true } ,
-                                    modifier = Modifier.padding(start = 60.dp, top = 70.dp),
+                            .padding(24.dp)
+                    ) {
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.Top
+                            ) {
+                                Text(
+                                    text = vm.cardData?.brand?.uppercase() ?: "CARD",
+                                    color = Color.White,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 2.sp
+                                )
 
-                           )
-                           {
-                               Icon(Icons.Default.MoreVert, contentDescription = "", tint = Color.Black)
-                           }
-
-                           DropdownMenu(expanded = extended,
+                                Box {
+                                    IconButton(onClick = { extended = true }) {
+                                        Icon(Icons.Default.MoreVert, contentDescription = null, tint = Color.White)
+                                    }
+                                    DropdownMenu(
+                                        expanded = extended,
                                         onDismissRequest = { extended = false }
-                           )
-                           {
-                               androidx.compose.material3.DropdownMenuItem(
-                                   text = { Text(text = "Edit") },
-                                   onClick = { extended = false },
-                                   leadingIcon = { Icon(Icons.Default.Edit, contentDescription = "") }
-                               )
+                                    ) {
+                                        androidx.compose.material3.DropdownMenuItem(
+                                            text = { Text(text = "Edit") },
+                                            onClick = { extended = false },
+                                            leadingIcon = { Icon(Icons.Default.Edit, contentDescription = "") }
+                                        )
 
-                               androidx.compose.material3.DropdownMenuItem(
-                                   text = { Text(text = "Delete") },
-                                   onClick = {
-                                       vm.deleteCard()
-                                       navController.navigate(route = Graph.LOBBY_CREDIT_CARDS)
-                                             },
-                                   leadingIcon = { Icon(Icons.Default.Delete, contentDescription = "") }
-                               )
-                           }
-                       }
+                                        androidx.compose.material3.DropdownMenuItem(
+                                            text = { Text(text = "Delete") },
+                                            onClick = {
+                                                vm.deleteCard()
+                                                navController.navigate(route = Graph.LOBBY_CREDIT_CARDS)
+                                            },
+                                            leadingIcon = { Icon(Icons.Default.Delete, contentDescription = "") }
+                                        )
+                                    }
+                                }
+                            }
 
-                   }
+                            // Chip placeholder
+                            Surface(
+                                modifier = Modifier
+                                    .padding(vertical = 8.dp)
+                                    .size(width = 40.dp, height = 28.dp),
+                                color = Color(0xFFFFD700).copy(alpha = 0.7f),
+                                shape = RoundedCornerShape(4.dp)
+                            ) {}
+
+                            Spacer(modifier = Modifier.weight(1f))
+
+                            Text(
+                                text = "**** **** **** ${vm.cardData?.fourDigits}",
+                                color = Color.White,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                letterSpacing = 4.sp
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = vm.cardData?.alias ?: "",
+                                color = Color.White.copy(alpha = 0.7f),
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Normal
+                            )
+                        }
+                    }
                 }
 
                 ElevatedCardComponent(vm)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                vm.transactionList?.let { CardTransaction(it, vm) }
+                vm.transactionList?.let { CardTransaction(it, vm, navController) }
         }
    }
 

@@ -4,9 +4,10 @@
     <style name="Theme.CreditCardExpenses" parent="android:Theme.Material.Light.NoActionBar" />
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/teal_200</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/banking_blue</item>
         <item name="postSplashScreenTheme">@style/Theme.CreditCardExpenses</item>
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/baseline_credit_card_24</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/ic_splash_card</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="s">@color/banking_blue</item>
     </style>
 
 </resources>

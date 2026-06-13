@@ -14,7 +14,6 @@ class MainViewModel  : ViewModel() {
     val isReady = _isReady.asStateFlow()
     init {
         viewModelScope.launch {
-            delay(3000L)
             _isReady.value = true
         }
     }
